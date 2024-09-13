@@ -106,7 +106,7 @@ int main()
         printf("1.enqueue\n");
         printf("2.dequeue\n");
         printf("3.print the top element\n");
-        printf("4.print all the element of the stack\n");
+        printf("4.print all the element of the queue\n");
         printf("5.quit\n");
         printf("6.please enter your choice:");
         scanf("%d",&choice);
