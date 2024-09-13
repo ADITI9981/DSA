@@ -4,69 +4,136 @@ struct node{
    int data;
    struct node*next;
 };
-struct node*front;
-struct node*rear;
 
-void enqueue(int x)
+struct node*rear;
+struct node*front;
+
+int isempty()
 {
-    struct node*newnode;
-    newnode=malloc(sizeof(struct node));
-    newnode->data=x;
-    newnode->next=NULL;
-    if(front==0 && rear==0)
-    {
-        rear=front=newnode;
-    }
-    else
-    {
-        rear->next=newnode;
-        rear=newnode;
-    }
-}
-void dequeue()
-{
-    struct node*temp;
-    temp=front;
     if(front==0&&rear==0)
     {
-        printf("empty");
+        return 1;
     }
     else{
-        front=front->next;
-        free(temp);
+        return 0;
     }
 }
-    void peek()
-    {
-        if(front==0&&rear==0)
-        {
-            printf("empty");
-        }
-        printf("\npeek element is %d:",front->data);
-    }
-    void display()
-    { 
-        struct node*temp;
-        if(front==0&&rear==0)
-        {
-            printf("empty");
-        }
-       temp=front;
-       while(temp!=NULL)
-       {
-        printf("\t%d",temp->data);
-        temp=temp->next;
-       }
-    }
-int main()
+
+void enqueue(int data)
 {
-    enqueue(2);
-    enqueue(3);
-    enqueue(4);
-    dequeue();
-    display();
-    peek();
+    struct node*temp=malloc(sizeof(struct node));
+    temp->data=data;
+    temp->next=NULL;
+    if (isempty())
+    {
+       rear=front=temp;
+    }
+    else{
+        rear->next=temp;
+        rear=temp;
+    }
     
 }
 
+int dequeue()
+{
+    struct node*temp=front;
+    if(isempty())
+    {
+        printf("queue is underflow");
+        
+    }
+    
+    else{
+         printf("the deleted element is:%d",front->data);
+        front=front->next;
+        free(temp);
+    }
+    
+}
 
+void print()
+{
+    struct node*temp=front;
+    if(isempty())
+    {
+        printf("queue is empty");
+    }
+    else{
+        while(temp!=0)
+        {
+            printf("%d\t",temp->data);
+            temp=temp->next;
+        }
+    }
+    printf("\n");
+}
+
+void peek()
+{
+    if(isempty())
+    {
+        printf("queue is empty");
+        
+    }
+    else{
+        printf("the peek element is:%d",front->data);
+        
+    }
+    printf("\n");
+}
+
+
+
+int main()
+  {
+     int choice,data;
+      while (1)
+      {
+        
+      
+        printf("\n");
+        printf("1.enqueue\n");
+        printf("2.dequeue\n");
+        printf("3.print the top element\n");
+        printf("4.print all the element of the stack\n");
+        printf("5.quit\n");
+        printf("6.please enter your choice:");
+        scanf("%d",&choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("enter the element to add:");
+            scanf("%d",&data);
+            enqueue(data);
+            break;
+        case 2:
+
+        dequeue();
+        break;
+
+        case 3:
+        peek();
+        break;
+
+        case 4:
+        print();
+        break;
+
+        case 5:
+        exit(1);
+        break;
+
+        default:
+        printf("wrong choice");
+        break;
+        }
+      }
+        return 0;
+    }
+     
+  
+   
+
+  
