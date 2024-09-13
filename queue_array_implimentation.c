@@ -1,64 +1,149 @@
 #include<stdio.h>
-#define size 5
+#include<stdlib.h>
+# define size 5
 int queue[size];
 int rear=-1;
 int front=-1;
-void enqueue(int x){
+
+int isempty()
+{
+    if(front==-1&&rear==-1)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int isfull()
+{
     if(rear==size-1)
     {
-        printf("queue is full");
-    }
-    else if(rear==-1&&front==-1)
-    {
-        front=rear=0;
-        queue[rear]=x;
+        return 1;
     }
     else{
-        rear++;
-        queue[rear]=x;
+        return 0;
     }
 }
-void dequeue()
+
+void enqueue(int data)
 {
-    if(rear==front)
+    if(isfull())
     {
-       rear=front=-1;
+        printf("queue is overflow");
     }
-    else if(rear==-1&&front==-1)
+    else if (isempty())
     {
-       printf("queue is empty");
+        rear=front=0;
+        queue[rear]=data;
     }
     else{
-        printf("the deleted element is: %d",queue[front]);
+        rear=rear+1;
+        queue[rear]=data;
+    }
+    
+}
+
+int dequeue()
+{
+    if(isempty())
+    {
+        printf("queue is underflow");
+        
+    }
+    else if (rear==front)
+    {
+        rear=front=-1;
+        
+    }
+    else{
+        printf("the deleted element is:%D",queue[front]);
         front++;
-        printf("\n");
     }
+    
 }
-void peek()
+
+void print()
 {
-    printf("the peek element is: %d",queue[front]);
-    printf("\n");
-}
-void display()
-{
-    if(rear==-1&&front==-1)
+    if(isempty())
     {
-        printf("empty queue");
+        printf("queue is empty");
     }
     else{
-        for(int i=front;i<=rear;i++)
+        for(int i=front;i<rear+1;i++)
         {
-            printf("%d\n",queue[i]);
+            printf("%d\t",queue[i]);
         }
     }
+    printf("\n");
 }
-int main()
+
+void peek()
 {
-    enqueue(2);
-    enqueue(4);
-    enqueue(5);
-    dequeue();
-    peek();
-    display();
-    return 0;
+    if(isempty())
+    {
+        printf("queue is empty");
+        
+    }
+    else{
+        printf("the peek element is:%d",queue[front]);
+        
+    }
+    printf("\n");
 }
+
+
+
+int main()
+  {
+     int choice,data;
+      while (1)
+      {
+        
+      
+        printf("\n");
+        printf("1.enqueue\n");
+        printf("2.dequeue\n");
+        printf("3.print the top element\n");
+        printf("4.print all the element of the stack\n");
+        printf("5.quit\n");
+        printf("6.please enter your choice:");
+        scanf("%d",&choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("enter the element to add:");
+            scanf("%d",&data);
+            enqueue(data);
+            break;
+        case 2:
+
+        dequeue();
+        break;
+
+        case 3:
+        peek();
+        break;
+
+        case 4:
+        print();
+        break;
+
+        case 5:
+        exit(1);
+        break;
+
+        default:
+        printf("wrong choice");
+        break;
+        }
+      }
+        return 0;
+    }
+     
+  
+   
+
+  
