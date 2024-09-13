@@ -43,6 +43,11 @@ int dequeue()
         printf("queue is underflow");
         
     }
+
+    else if(rear==front)
+    {
+       rear=front=NULL;
+    ]
     
     else{
          printf("the deleted element is:%d",front->data);
