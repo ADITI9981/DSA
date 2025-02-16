@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n) {
+    // Base cases
+    if (n == 1 || n == 2) return 1;
+
+    int first = 1, second = 1, curr = 0;
+
+    // Compute Fibonacci using iteration (O(n) time, O(1) space)
+    for (int i = 3; i <= n; i++) {
+        curr = first + second;
+        first = second;
+        second = curr;
+    }
+
+    return curr;
+}
+
+int main() {
+
+    int n;
+    cin>>n;
+    cout << fibonacci(n) << endl;
+
+    return 0;
+}
